@@ -1,5 +1,5 @@
-// Challenge 1
 class D {
+  // Challenge 1
   constructor(...args) {
     this._date = new Date(...args);
   }
@@ -62,6 +62,57 @@ class D {
   get secs() {
     return this._date.getSeconds();
   }
+
+  // Challenge 3
+  format(mask = "Y M D") {
+    let result = "";
+    for (let char of mask) {
+      switch (char) {
+        case "Y":
+          result += this.year;
+          break;
+        case "y":
+          result += this.yr;
+          break;
+        case "M":
+          result += this.month;
+          break;
+        case "m":
+          result += this.mon;
+          break;
+        case "D":
+          result += String(this.date).padStart(2, "0");
+          break;
+        case "d":
+          result += this.date;
+          break;
+        case "#":
+          result += String(this.dy).padStart(2, "0");
+          break;
+        case "H":
+          result += String(this.hours).padStart(2, "0");
+          break;
+        case "h":
+          result += this.hours;
+          break;
+        case "I":
+          result += String(this.mins).padStart(2, "0");
+          break;
+        case "i":
+          result += this.mins;
+          break;
+        case "S":
+          result += String(this.secs).padStart(2, "0");
+          break;
+        case "s":
+          result += this.secs;
+          break;
+        default:
+          result += char;
+      }
+    }
+    return result;
+  }
 }
 
 // With no parameters:
@@ -76,11 +127,15 @@ const d = new D(new Date());
 // console log area
 let testing = true;
 if (testing == true) {
+  // Challenge 1
+  console.log("------------------Challenge 1------------------");
   console.log(a._date);
   console.log(b._date);
   console.log(c._date);
   console.log(d._date);
 
+  // Challenge 2
+  console.log("------------------Challenge 2------------------");
   console.log("Full year:", d.year); // 2021 - Full year
   console.log("Short year:", d.yr); // 21   - Short year
   console.log("Full month:", d.month); // July - Full month
@@ -91,4 +146,13 @@ if (testing == true) {
   console.log("Hour:", d.hours); // 18   - Hour
   console.log("Minutes:", d.mins); // 6    - Minutes
   console.log("Seconds:", d.secs); // 5    - Seconds
+
+  // Challenge 3
+  console.log("------------------Challenge 3------------------");
+  // const d = new D(2017, 0, 2, 3, 4, 5);
+  console.log(d.format()); // 2017 January 02
+  console.log(d.format("y/m/d")); // 17/Jan/2
+  console.log(d.format("H:I:S")); // 03:04:05
+  console.log(d.format("h:i:s")); // 3:4:5
+  console.log(d.format("Y-M-D h:I:S")); // 2017-January-02 3:04:05
 }
