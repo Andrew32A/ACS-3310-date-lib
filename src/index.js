@@ -1,17 +1,34 @@
 class D {
   // Challenge 1
+  /**
+   * Constructor that initializes the date object.
+   * @param {...*} args - Arguments to be passed to the native Date object.
+   */
   constructor(...args) {
     this._date = new Date(...args);
   }
 
   // Challenge 2
+  /**
+   * Gets the full year of the date.
+   * @returns {number} The full year.
+   */
   get year() {
     return this._date.getFullYear();
   }
 
+  /**
+   * Gets the last two digits of the year.
+   * @returns {string} The short form of the year.
+   */
   get yr() {
     return this._date.getFullYear().toString().slice(-2);
   }
+
+  /**
+   * Gets the full name of the month.
+   * @returns {string} The full month name.
+   */
   get month() {
     const months = [
       "January",
@@ -26,10 +43,19 @@ class D {
     ];
     return months[this._date.getMonth()];
   }
+
+  /**
+   * Gets the abbreviated form of the month.
+   * @returns {string} The short form of the month.
+   */
   get mon() {
     return this.month.slice(0, 3);
   }
 
+  /**
+   * Gets the day of the week.
+   * @returns {string} The name of the day.
+   */
   get day() {
     const days = [
       "Sunday",
@@ -43,27 +69,52 @@ class D {
     return days[this._date.getDay()];
   }
 
+  /**
+   * Gets the abbreviated form of the day of the week.
+   * @returns {string} The short form of the day name.
+   */
   get dy() {
     return this.day.slice(0, 3);
   }
 
+  /**
+   * Gets the day of the month.
+   * @returns {number} The date.
+   */
   get date() {
     return this._date.getDate();
   }
 
+  /**
+   * Gets the hour of the day.
+   * @returns {number} The hour.
+   */
   get hours() {
     return this._date.getHours();
   }
 
+  /**
+   * Gets the minutes of the hour.
+   * @returns {number} The minutes.
+   */
   get mins() {
     return this._date.getMinutes();
   }
 
+  /**
+   * Gets the seconds of the minute.
+   * @returns {number} The seconds.
+   */
   get secs() {
     return this._date.getSeconds();
   }
 
   // Challenge 3
+  /**
+   * Formats the date object.
+   * @param {string} [mask="Y M D"] - The mask to format the date.
+   * @returns {string} The formatted date.
+   */
   format(mask = "Y M D") {
     let result = "";
     for (let char of mask) {
@@ -113,6 +164,38 @@ class D {
     }
     return result;
   }
+
+  // Challenge 4
+  /**
+   * Describes how long ago or in the future the date is.
+   * @returns {string} A string representation of the time difference.
+   */
+  when() {
+    const now = new Date();
+
+    const difference = this._date - now;
+
+    const secondsDiff = Math.abs(difference) / 1000;
+    const minutesDiff = secondsDiff / 60;
+    const hoursDiff = minutesDiff / 60;
+    const daysDiff = Math.floor(hoursDiff / 24);
+    const monthsDiff = Math.floor(daysDiff / 30.44);
+    const yearsDiff = Math.floor(daysDiff / 365.25);
+
+    if (daysDiff === 0) return "today";
+    if (yearsDiff > 0)
+      return `${yearsDiff} year${yearsDiff > 1 ? "s" : ""} ${
+        difference < 0 ? "ago" : "from now"
+      }`;
+    if (monthsDiff > 0)
+      return `${monthsDiff} month${monthsDiff > 1 ? "s" : ""} ${
+        difference < 0 ? "ago" : "from now"
+      }`;
+    if (daysDiff > 0)
+      return `${daysDiff} day${daysDiff > 1 ? "s" : ""} ${
+        difference < 0 ? "ago" : "from now"
+      }`;
+  }
 }
 
 // With no parameters:
@@ -155,4 +238,17 @@ if (testing == true) {
   console.log(d.format("H:I:S")); // 03:04:05
   console.log(d.format("h:i:s")); // 3:4:5
   console.log(d.format("Y-M-D h:I:S")); // 2017-January-02 3:04:05
+
+  // Challenge 4
+  console.log("------------------Challenge 4------------------");
+  let e = new D(2023, 0, 2, 3, 4, 5);
+  console.log(e.when()); // 6 months ago
+  e = new D(2023, 9, 2, 3, 4, 5);
+  console.log(e.when()); // 3 months from now
+  e = new D(2028, 9, 2, 3, 4, 5);
+  console.log(e.when()); // 5 years from now
+  e = new D(2023, 6, 30, 3, 4, 5);
+  console.log(e.when()); // 3 days from now
+  e = new D();
+  console.log(e.when()); // today
 }
