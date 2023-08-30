@@ -208,7 +208,7 @@ const c = new D(1970, 1, 1, 0, 0, 0);
 const d = new D(new Date());
 
 // console log area
-let testing = true;
+let testing = false;
 if (testing == true) {
   // Challenge 1
   console.log("------------------Challenge 1------------------");
@@ -252,3 +252,5 @@ if (testing == true) {
   e = new D();
   console.log(e.when()); // today
 }
+
+module.exports = { D };
