@@ -1,5 +1,10 @@
 # Date Library
 
+![npm](https://img.shields.io/npm/v/%40andrew_dominican%2Fdate-lib)
+![NPM](https://img.shields.io/npm/l/%40andrew_dominican%2Fdate-lib)
+![npm package minimized gzipped size (select exports)](https://img.shields.io/bundlejs/size/%40andrew_dominican%2Fdate-lib)
+![GitHub issues](https://img.shields.io/github/issues/Andrew32A/Andrew32A)
+
 ### Table of Contents
 
 - [constructor][1]

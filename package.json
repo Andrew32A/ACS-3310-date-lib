@@ -1,6 +1,6 @@
 {
-  "name": "date-lib",
-  "version": "1.0.0",
+  "name": "@andrew_dominican/date-lib",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "directories": {
